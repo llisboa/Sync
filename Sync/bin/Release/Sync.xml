@@ -1,0 +1,1914 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Sync
+</name>
+</assembly>
+<members>
+<member name="F:Sync.Icraft.IcftBase.ComboSepDefault">
+	<summary>
+ Separador padrão de colunas em combo ou elementos da biblioteca de um modo geral: PARAM1 | PARAM2 ...
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.ComboNull">
+	<summary>
+ String que aparece na combo quando item vazio é incluído, representando nenhuma seleção.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.DAO_RelationAttributeEnum_dbRelationDeleteCascade">
+	<summary>
+ Definições DAO para permitir vínculo conforme necessidade.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.MySQL">
+	<summary>
+ Tipos de bases previstas, nomes de providers para facilitar.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.TipoBaseSQL">
+	<summary>
+ Opções de comando para funções de formatação de data para gravação em banco de dados.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ExprSQLTipo">
+	<summary>
+ Opções de comando para funções de tratamento de SQL.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.EncrypBChavePadrao">
+	<summary>
+ Chave default utilizada por encrypt/decrypt para codificação de texto.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.TipoIdioma">
+	<summary>
+ Idiomas padronizados facilitando seu uso em biblioteca.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ElementoStrOpera">
+	<summary>
+ Opções para interpretação do elemento quando adicionado ao conjunto elementosstr.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.TipoTxtIcftMenu">
+	<summary>
+ Texto encontrado em tipo de componente.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Sync.Icraft.IcftBase.Gerador_Tabula">
+	<summary>
+ Texto utilizado como tabulador em visualizações das comparações de estrutura no GERADOR.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.NodeCampo">
+	<summary>
+ Atributos previstos para procura node.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.NoCacheTipo">
+	<summary>
+ Tipo de opção para execução NOCACHE.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.AutomatizaCombo(System.Object,System.Boolean)">
+	<summary>
+ Automatizar combo significa garantir que as dependências (param ATUALIZAR) sejam atualizadas mediante qualquer alteração.
+ </summary>
+	<param name="ComboOuContainer">Deve ser um combobox ou um container, sendo todos combos existentes neste automatizados.</param>
+	<param name="CarregarDeUmaVez">Pode-se passar NOT POSTBACK garantir a carga somente ao ser carregada a página.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CarregaCombo(System.Web.UI.WebControls.DropDownList@)">
+	<summary>
+ Carrega o combobox conforme parâmetros: SQL, QtdCols, OcultaValor, StrConn entre outros, definidos como atributos do controle passado.
+ </summary>
+	<param name="Combo">Combo a ser carregado.</param>
+	<remarks>
+ PARAMS
+        [Atualizar] = corresponde à campos separados por ponto e vírgula que serão atualizados automaticamente mediante alteração do valor deste combo.
+        [QtdCols] = quantidade de colunas
+        [OcultaValor] = true para não apresentar valor na expressão de apresentação
+          considerado somente quando mais de uma coluna.
+          importante saber que a primeira coluna sempre será a de valor, podendo ou não ser apresentada, conforme parâmetro ocultacoluna.
+        [SQL] = cláusula de select a ser submetida, podendo conter [:CAMPO] para pesquisa em todo o formulário, containers irmãos, filhos e depois pais até PAGE.
+        [StrConn] = string de conexão.
+        [SeparaCols] = separador de colunas.
+        [NotNull] = não inclui valor que representa o nulo.
+ </remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CarregaCombo(System.Object,System.Boolean,System.Object[])">
+	<summary>
+ Carrega valores em um combobox. Cada valor da lista será uma linha do combo.
+ </summary>
+	<param name="Combo">Combobox a ser carregado.</param>
+	<param name="Limpa">True limpa (clear) antes ou false para acrescentar itens.</param>
+	<param name="Params">Lista de parâmetros, que pode ser string, array, arraylist ou dataset.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CarregaCombo(System.Object@,System.Int32,System.Boolean,System.String,System.Boolean,System.Object[])">
+	<summary>
+ Carrega combo com expressões (textos apresentados) diferentes dos valores.
+ Os parâmetros são passados em sequência, sendo considerados além das strings, arraylists, vetores e datasets.
+ Valor sempre será a primeira coluna.
+ </summary>
+	<param name="Combo">Combo a ser atualizado.</param>
+	<param name="QtdCols">Quantidade de colunas existentes nos parâmetros sequenciados.</param>
+	<param name="OcultaValor">Vai apresentar como início da expressão a coluna zero ou não.</param>
+	<param name="SeparadorCols">Separador de colunas, caso diferente do padrão.</param>
+	<param name="Limpa">True se o combo será limpo antes ou false para acrescentar valores.</param>
+	<param name="Params">Lista de parâmetros, que podem ser strings, arrays, arraylists ou datasets.</param>
+	<remarks>
+ Exemplo1:
+     select matr, nome from sócio
+     são duas colunas (QtdCols=2)
+     mostrando também a matrícula (OcultaValor=false)
+     sem a preocupação com separador de colunas
+ 
+ Exemplo2:
+     select cod, CPF, bairro, cidade, estado from clente
+     são 5 colunas (QtdCols=5)
+     não mostraremos o código (OCultaValor=true)
+     colocando separador como ", " (SeparadorCols=", ")
+ </remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CarregaComboVinc(System.Web.UI.WebControls.DropDownList,System.String,System.String,System.String,System.String)">
+	<summary>
+ Rotina de atualização de combos fazendo uso de parâmetros como SQL, QTDCOLS etc diretamente.
+ </summary>
+	<param name="Combo">Combobox a ser atualizado.</param>
+	<param name="SQL">Expressão SQL podendo conter termos de marcrosubst como [:CAMPOFORM].</param>
+	<param name="StrConn">String de conexão utilizada para pesquisa.</param>
+	<param name="Atualizar">Campos a serem atualizados por estes (sofrerão databind automático).</param>
+	<param name="VinculadoA">Campos que deverão atualizar este.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CarregaComboVinc(System.Web.UI.WebControls.DropDownList,System.Int32,System.Boolean,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Carrega combobox vinculando-o aos outros. Uma maneira de fazer atribuição de parâmetros por código de maneira simplificada.
+ Já automatiza combos vinculados e este, se também possuir ATUALIZA.
+ </summary>
+	<param name="Combo">Combobox a ser carregado.</param>
+	<param name="QtdCols">Quantidade de colunas.</param>
+	<param name="OcultaValor">True para ocultar a primeira coluna da expressão, caso QtdCols &gt; 1.</param>
+	<param name="SeparadorCols">Separador de colunas caso diferente do padrão.</param>
+	<param name="SQL">Texto SQL a ser interpretado podendo conter macrosubst tipo [:CAMPOFORM].</param>
+	<param name="StrConn">String de conexão para pesquisa.</param>
+	<param name="Atualizar">Campos que serão atualizados por este, caso existam.</param>
+	<param name="VinculadoA">Campos que deverão atualizar este.</param>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ListaDePaises">
+	<summary>
+ Lista de países para preenchimento de fontes de dados de controles combo e afins.
+ </summary>
+	<value></value>
+	<returns>Um array de strings onde cada elemento representa um país da lista.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.EstadosDoBrasil">
+	<summary>
+ Lista de estados do Brasil para preenchimento de fontes de dados de controles combo e afins.
+ </summary>
+	<value></value>
+	<returns>Um array de strings onde cada elemento representa um estado do Brasil presente na lista.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.EnviaEmail(System.Net.Mail.MailMessage@,System.Net.Mail.SmtpClient@,System.String,System.Object,System.String,System.String@,System.Net.Mail.MailPriority,System.String,System.Int32,System.Object,System.Object,System.String,System.String,System.Boolean,System.Collections.ArrayList@,System.Collections.ArrayList@,System.Collections.ArrayList,System.Collections.ArrayList)">
+	<summary>
+ Envia email e, caso ocorra, retorna string de erro. Formato completo exige dispose do EMAIL e apagatemps no final.
+ </summary>
+	<param name="Mail">Caso já esteja pronto, poderá passar obj de mensagem ou retorná-lo após envio.</param>
+	<param name="De">Nome e email do remetente no formato: 'nome' [email@dominio.com.br].</param>
+	<param name="Para">Nome e email dos destinatários no formato: 'nome1' [email1@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="Assunto">Texto de assunto da mensagem.</param>
+	<param name="Corpo">Corpo da mensagem em html.</param>
+	<param name="Prioridade">Nível de prioridade entre alta, normal e baixa.</param>
+	<param name="SmtpHost">Servidor de smtp. Na sua ausência, smtp_host do webconfig será considerado.</param>
+	<param name="SmtpPort">Porta de smtp. Na sua ausência, smtp_port do webconfig será considerada.</param>
+	<param name="CC">Com cópia. Deve conter lista 'nome' [email@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="BCC">Com cópia oculta. Também pode ser informado com BCC na frente de qualquer destinatário. Deve conter lista 'nome' [email@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="SMTPUsuario">Usuário de autenticação no SMTP.</param>
+	<param name="SMTPSenha">Senha de autenticação no SMTP.</param>
+	<param name="IncorporaImagens">Ordena incorporação das imagens ao invés de seguirem links para elas.</param>
+	<param name="UrlsLocais">Parâmetros contendo url e dir correspondente para redirecionamento, podendo ser mais de um par.</param>''' 
+ <returns>Retorna um texto correspondente ao erro ou "" caso o envio tenha sido um sucesso. Retorna também variáveis atualizadas: Smtp, Mail, Corpo, CIDS e TMPS. Se optar por este formato, deverá preocupar-se em dar dispose no mail e apagar arquivos temporários.</returns>
+	<param name="Attachs">Lista de arquivos a seguirem attachados.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.EnviaEmail(System.String,System.Object,System.String,System.String,System.Net.Mail.MailPriority,System.String,System.Int32,System.Object,System.Object,System.String,System.String,System.Boolean,System.Collections.ArrayList,System.Collections.ArrayList)">
+	<summary>
+ Envia email e, caso ocorra, retorna string de erro.
+ </summary>
+	<param name="De">Nome e email do remetente no formato: 'nome' [email@dominio.com.br].</param>
+	<param name="Para">Nome e email dos destinatários no formato: 'nome1' [email1@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="Assunto">Texto de assunto da mensagem.</param>
+	<param name="Corpo">Corpo da mensagem em html.</param>
+	<param name="Prioridade">Nível de prioridade entre alta, normal e baixa.</param>
+	<param name="SmtpHost">Servidor de smtp. Na sua ausência, smtp_host do webconfig será considerado.</param>
+	<param name="SmtpPort">Porta de smtp. Na sua ausência, smtp_host do webconfig será considerada.</param>
+	<param name="CC">Com cópia. Deve conter lista 'nome' [email@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="BCC">Com cópia oculta. Também pode ser informado com BCC na frente de qualquer destinatário. Deve conter lista 'nome' [email@dominio.com.br];'nome2' [email2@dominio.com.br].</param>
+	<param name="SMTPUsuario">Usuário de autenticação no SMTP.</param>
+	<param name="SMTPSenha">Senha de autenticação no SMTP.</param>
+	<param name="IncorporaImagens">Ordena incorporação das imagens ao invés de seguirem links para elas.</param>
+	<param name="UrlsLocais">Parâmetros contendo url e dir correspondente para redirecionamento, podendo ser mais de um par.</param>''' 
+ <param name="Attachs">Lista de arquivos a seguirem attachados.</param>
+	<returns>Retorna um texto correspondente ao erro ou "" caso o envio tenha sido um sucesso.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.GravaLog(System.String,System.String)">
+	<summary>
+ Grava texto em arquivo no disco.
+ </summary>
+	<param name="ArqLog">Nome do arquivo, incluindo seu diretório.</param>
+	<param name="Msg">Mensagem a ser gravada.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.UriRaiz(System.String)">
+	<summary>
+ Retorna URI raíz do site, considerando as variáveis de ambiente site_url e url_site.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Exists(System.Object,System.String,System.String)">
+	<summary>
+ Verifica existência de item na lista sem quebra por delimitador.
+ </summary>
+	<param name="Lista">Lista de objetos onse a pesquisa ocorrerá.</param>
+	<param name="Conteudo">Conteúdo pesquisado.</param>
+	<param name="Atributo">Atributo opcional. Na falta deste, nome será utilizado.</param>
+	<returns>Retorna true caso encontre ou false caso contrário.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TemNaLista(System.Object,System.Object,System.String,System.Boolean)">
+	<summary>
+ Verifica existência de item texto na lista, quebrando texto origem conforme delimitador "UM;DOIS;TRES".
+ </summary>
+	<param name="Lista">Texto ou lista de objetos onde conteúdo será pesquisado.</param>
+	<param name="Conteudo">Conteúdo a ser pesquisado, que pode ser um texto ou um objeto.</param>
+	<param name="Delimit">Delimitador para o caso de origem como texto, que será decomposto de acordo com o delimitador.</param>
+	<param name="IgnoreCase">Opção de ignorar diferenciação de maiúsculas e minúsculas.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ObjFindByAtt(System.Object,System.Object,System.String)">
+	<summary>
+ Procura objeto através de um atributo.
+ </summary>
+	<param name="Lista">Lista de objetos na qual a pesquisa ocorrerá.</param>
+	<param name="Conteudo">Conteúdo a ser pesquisado.</param>
+	<param name="Atributo">Atributo considerado para pesquisa. Na sua ausência, nome será escolhido.</param>
+	<returns>Retorna o item encontrado ou nothing caso não haja coincidência de atributo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Espera(System.Double)">
+	<summary>
+ Executa pausa na thread atual como sleep.
+ </summary>
+	<param name="Segundos">Segundos de pausa.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ReplRepl(System.String,System.String,System.String)">
+	<summary>
+ Troca de texto enquanto este for encontrado na string de origem.
+ </summary>
+	<param name="Texto">Texto no qual ocorrerá a troca.</param>
+	<param name="De">Texto que será trocado. Enquanto este for encontrado, será substituído.</param>
+	<param name="Para">Texto a ser colocado no local do texto encontrado.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ProcuraNode(System.Web.UI.WebControls.TreeNodeCollection,Sync.Icraft.IcftBase.NodeCampo,System.String)">
+	<summary>
+ Procura node em uma árvore através de atributos previstos como enum NodeCampo.
+ </summary>
+	<param name="Arvore">Árvore onde ocorrerá a procura.</param>
+	<param name="Campo">Atributos no qual será baseada a procura.</param>
+	<param name="Conteudo">Conteúdo que deverá constar no atributo.</param>
+	<returns>Retorna o threenode, caso seja encontrado ou Nothing.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ProcuraNodeURLComplSessao(System.Web.UI.WebControls.TreeNodeCollection,System.String,System.String,System.String)">
+	<summary>
+ Busca de node com base em conteúdo passado por variável GET.
+ </summary>
+	<param name="Arvore">Árvore a ser pesquisada.</param>
+	<param name="URL">URL tratada contendo a variável.</param>
+	<param name="SessaoVarNome">Nome da variável a ser extraída da URL.</param>
+	<param name="SessaoVarDef">Valor default da variável a ser considerada na falta da variável.</param>
+	<returns>Node encontrado ou nothing.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.StrStr(System.String,System.Int32,System.Int32)">
+	<summary>
+ Obtém parte da string considerando parâmetro de início e final, como exemplo desta instrução existente no C++.
+ </summary>
+	<param name="Variavel">Variável texto a ser tratado.</param>
+	<param name="Inicio">Posição inicial a considerar, partindo do 0. Número negativo considera ponto a partir do fim do texto (-1 é o último caracter).</param>
+	<param name="Final">Posição final do texto a considerar partindo do 0. Número negativo considera ponto a partir do fim (-2 significa texto até o penúltimo caracter).</param>
+	<returns>Retorna parte do texto selecionado entre início e fim indicados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExprExpr(System.String,System.String,System.String,System.Object[])">
+	<summary>
+ Concatena um conjunto de expressões separando-as ou não por um delimitador especificado.
+ </summary>
+	<param name="Delim">Um caractere ou expressão que será colocada entre as outras.</param>
+	<param name="DelimAlternativo">Um caractere ou expressão que será substituída por Delim.</param>
+	<param name="Inicial">Um caractere ou expressão que será colocada no início da string.</param>
+	<param name="Segmentos">O conjunto de expressões que será concatenado.</param>
+	<returns>Retorna uma string com todos os objetos de Segmentos concatenados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.FileExpr(System.String[])">
+	<summary>
+ Obtém path de arquivo concatenando partes de diretório e arquivo, como por exemplo: "c:\" + "dir1" + "subdir1" + "arquivo.txt". A rotina colocará as barras. Pode-se passar ~/ também.
+ </summary>
+	<param name="Segmentos">Segmentos a serem concatenados em forma de diretório e arquivo.</param>
+	<returns>Retorna path resultante da concatenação de segmentos, evitando barras repetidas.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.URLExpr(System.Object[])">
+	<summary>
+ Contatena URL evitando barras repetidas.
+ </summary>
+	<param name="Segmentos">São os trechos a serem concatenados, podendo ser mais de dois.</param>
+	<returns>Retorna expressão de segmentos concatenados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.SegmExpr(System.String,System.Object[])">
+	<summary>
+ Concatena segmentos incluindo separador entre os termos existentes.
+ </summary>
+	<param name="Separador">Termo a ser colocado entre os segmentos.</param>
+	<param name="Segmentos">Itens em paramarray a ser concatenado com o separador.</param>
+	<returns>Retorna texto resultante da concatenação dos segmentos utilizando separador.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NoCache(System.Web.UI.Page,Sync.Icraft.IcftBase.NoCacheTipo)">
+	<summary>
+ Cancela cache da página indicada.
+ </summary>
+	<param name="Pagina">Página que deverá ter o cache cancelado.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ItemsDoTipo(System.Object,System.String,System.String)">
+	<summary>
+ Busca nos subcontrols de um objeto, itens do tipo especificado.
+ </summary>
+	<param name="Obj">Container a ser pesquisado.</param>
+	<param name="Prefix">Prefixo dos controles considerados.</param>
+	<param name="Tipo">Tipo no formato texto ex:System.String.</param>
+	<returns>Retorna lista de objetos encontrados, que atendam o critério.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CopiaItens(System.Object@,System.Object@)">
+	<summary>
+ Adiciona itens de uma origem para uma coleção destino.
+ </summary>
+	<param name="Destino">A coleção na qual serão adicionados os itens.</param>
+	<param name="Origem">Uma coleção contendo os itens a serem enumerados (for each) para cópia.</param>
+	<returns>Retorna a quantidade de itens copiados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.SelecionaDivisaoPainel(System.Object,System.String,System.String)">
+	<summary>
+ Mediante um conteúdo, apresenta ou não paineis.
+ </summary>
+	<param name="Container">Container onde ocorrerá a busca dos controles.</param>
+	<param name="Prefixo">Prefixo dos paineis que serão ocultados.</param>
+	<param name="Escolha">Sufixo do painel que será apresentado.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TemporaryFile(System.String,System.String)">
+	<summary>
+ Retorna número aleatório para ser utilizado como arquivo temporário.
+ </summary>
+	<param name="Dir">Diretório onde será criado o arquivo. Vazio para obter o diretório default configurado em web.config.</param>
+	<returns>Retorna diretório e arquivo temporário.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.InsereTab(System.String,System.String,System.String)">
+	<summary>
+ Insere tabuladores no início de cada linha.
+ </summary>
+	<param name="Texto">Texto a ser tratado.</param>
+	<param name="Tabulador">Texto que será utilizado como tabulador (default são quatro espaços).</param>
+	<param name="QuebradeLinha">Marcador de final de linha. Default é vbcrlf.</param>
+	<returns>Retorna texto tratado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ShowJSMessage(System.Web.UI.Page@,System.String,System.String)">
+	<summary>
+ Mostra uma mensagem alerta Javascript e realiza o redirecionamento cliente para uma URL especificada
+ </summary>
+	<param name="objPage">Objeto página aspx</param>
+	<param name="Mensagem">Mensagem a ser mostrada</param>
+	<param name="URL">URL para onde o cliente será redirecionado após apresentação da mensagem</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExecPostBack(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Rotina que cria texto para submissão de form contendo evento em ASP.NET.
+ </summary>
+	<param name="ObjPage">Página que receberá o evento.</param>
+	<param name="Alvo">Alvo.</param>
+	<param name="Argumento">Argumento.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Exibe">
+	<summary>
+ formato do match de troca para link [link:descrição|url]
+ link:url|descrição 
+ img:url|legenda
+ imgbut:urlimagem|urllink|descrição
+ arquivo:url:descrição [[[[continuar]]]][[[[continuar]]]][[[[continuar]]]]
+ arvore...
+ tabela(col,lin):itens
+ 
+ classe iniciada. [[parei por causa da pressa para fazer sepon]]
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ImageURL(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Obtém a URL de um arquivo de imagem de acordo com o diretório especificado.
+ </summary>
+	<param name="Page">Página que precisa da URL.</param>
+	<param name="Arquivo">O nome do arquivo de imagem.</param>
+	<param name="Diretorio">Vazio para o diretório padrão. public para o diretório de imagens públicas e priv para o diretório de imagens privadas.</param>
+	<returns>Retorna a URL do arquivo de imagem requerido de acordo com o diretório especificado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ImageArq(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Obtém o endereço físico do arquivo de imagem especificado.
+ </summary>
+	<param name="Page">Página que precisa do endereço da imagem.</param>
+	<param name="Arquivo">O nome do arquivo de imagem.</param>
+	<param name="Diretorio">Vazio para o diretório padrão. public para o diretório de imagens públicas e priv para o diretório de imagens privadas.</param>
+	<returns>Retorna o endereço físico do arquivo de imagem requerido de acordo com o diretório especificado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExibeHTMLEnc(System.Web.UI.Page,System.String)">
+	<summary>
+ Obtém texto html codificado transformando quebras de linha em parágrafos.
+ </summary>
+	<param name="Page">Página que pediu o texto codificado.</param>
+	<param name="Texto">Texto que será codificado.</param>
+	<returns>Retorna a string passada em Texto com codificação HTML.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExibeHTML(System.Web.UI.Page,System.String)">
+	<summary>
+ Transforma texto comum em texto html.
+ </summary>
+	<param name="Page">Objeto page que está requisitando o texto.</param>
+	<param name="Texto">Texto que será transformado em html.</param>
+	<returns>Retorna o texto transformado em html ou o próprio texto caso este esteja entre &lt;html&gt; e &lt;/html&gt;</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ExibeDataOpc">
+	<summary>
+ Formatos possíveis de data.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExibeData(System.Object,Sync.Icraft.IcftBase.ExibeDataOpc)">
+	<summary>
+ Formata data para exibição correta
+ </summary>
+	<param name="Momento">Data para ser formatada.</param>
+	<param name="Opc">ExibeDataOpc que será utilizado na apresentação.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExibeData(System.Object,System.String)">
+	<summary>
+ Formata data para exibição correta
+ </summary>
+	<param name="Momento">Data para ser formatada.</param>
+	<param name="Formato">Formato a ser apresentado. Padrão é dd/MM/yyyy HH:mm:ss.</param>
+	<returns>Retorna a data formatada.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.GravaData(System.DateTime,Sync.Icraft.IcftBase.TipoBaseSQL)">
+	<summary>
+ Formata data para gravação correta de acordo com o banco de dados
+ </summary>
+	<param name="data">Data para ser formatada.</param>
+	<param name="banco">Nome do banco de destino da data.</param>
+	<returns>Retorna a data formatada.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ArrayFindByAtt(System.Array,System.Object,System.String,System.Int32)">
+	<summary>
+ Retorna o primeiro item do array procurado pelo objeto ou atributo.
+ </summary>
+	<param name="Lista">Array a ser pesquisado.</param>
+	<param name="Conteudo">Conteúdo que será procurado ou no índice do array ou em algum atributo.</param>
+	<param name="Atributo">Vazio para procurar na posição ou nome para pesquisa pela propriedade attribute.</param>
+	<param name="Inicio">Zero para procurar do início ou posição inicial do array.</param>
+	<returns>Retorna o item do array encontrado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ArrayIndexFindByAtt(System.Array,System.String,System.String,System.Int32)">
+	<summary>
+ Retorna posição do primeiro item no array pelo objeto ou atributo.
+ </summary>
+	<param name="Lista">Array a ser pesquisado.</param>
+	<param name="Conteudo">Conteúdo que será procurado ou no índice do array ou em algum atributo.</param>
+	<param name="Atributo">Vazio para procurar na posição ou nome para pesquisa pela propriedade attribute.</param>
+	<param name="Inicio">Zero para procurar do início ou posição inicial do array.</param>
+	<returns>Retorna posição do item do array encontrado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.IncluiScript(System.Object@,System.String,System.String)">
+	<summary>
+ Carrega qualquer script no corpo da página.
+ </summary>
+	<param name="Pag">Página onde será carregado o script.</param>
+	<param name="NomeScript">Nome que o script terá no corpo.</param>
+	<param name="SegScript">Pode ser um nome de arquivo '~/dir/arquivo.js' ou um bloco '&lt;script&gt;....&lt;/script&gt;'.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Compare(System.Object,System.Object,System.Boolean)">
+	<summary>
+ Compara dois parâmetros com base em critério específicos para cada tipo.
+ </summary>
+	<param name="Param1">Primeiro parâmetro.</param>
+	<param name="Param2">Segundo parâmetro.</param>
+	<param name="IgnoreCase">Para ignorar diferença entre maiúsculo e minúsculo em comparações de strings.</param>
+	<returns>Retorna verdadeiro caso os itens sejam considerados iguais ou o contrário.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.AtualizouControle(System.Object,System.EventArgs)">
+	<summary>
+ Rotina que é executada quando qualquer CONTROLE é atualizado. Responsável pela atualização de outros CONTROLES dependentes.
+ </summary>
+	<param name="Controle">Controle que foi atualizado.</param>
+	<param name="e">Argumento padrão do sistema.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TemporaryDir(System.String)">
+	<summary>
+ Obtém diretório temporário, que corresponde ao param dir_temp do web.config.
+ </summary>
+	<returns>Retorna diretório para arquivos temporários sem a barra no final (ex: c:\inetpub\temp).</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.WebConf(System.String)">
+	<summary>
+ Retorna parâmetro específico do webconfig &gt; appsetings.
+ </summary>
+	<param name="param">Identificação do connectionstring desejado.</param>
+	<returns>Objeto connectionstringsettings obtido a partir do configurationmanager.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.FindControlEspecial(System.Object,System.String)">
+	<summary>
+ Procura um controle em um determinado panel. Criada por CTL.FINDCONTROL não conseguir encontrar obj em PANEL.
+ </summary>
+	<param name="Origem">Objeto onde será feita a procura.</param>
+	<param name="Controle">Nome do controle a ser procurado.</param>
+	<returns>Retorna controle ou nothing caso não encontre. A procura é feita somente naquele nível. Utilize FORM.FINDCONTROL para encontrar controles entre os filhos e FORM.FINDGERAL para procurar entre filhos e pais.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.IncluiStyleSheet(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Carrega qualquer script no corpo da página.
+ </summary>
+	<param name="Pag">Página onde será carregado o script.</param>
+	<param name="href">Caminho do css Ex:(~/diretorio/estilo.css)</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.AbstrCarac(System.String)">
+	<summary>
+ Escrever
+ </summary>
+	<param name="Texto"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Base36(System.Int32,System.Int32)">
+	<summary>
+ Transforma um número qualquer em caracteres utilizando Base36.
+ </summary>
+	<param name="NUM">O número que será transformado.</param>
+	<param name="NumCasas">A quantidade de casas que a string de retorno conterá. O número tem precedência sobre o resultado.</param>
+	<returns>Retorna uma string com o tamanho de NumCasas contendo o número passado em NUM convertido através de Base36.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Base36Alga(System.Int32)">
+	<summary>
+ Transforma um número entre 0 e 35 em um caractere utilizando Base36.
+ </summary>
+	<param name="IDP">O número que será transformado.</param>
+	<returns>Retorna o caractere para o qual o número foi transformado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ApagaTemps(System.Collections.ArrayList)">
+	<summary>
+ Apaga arquivos temporários ignorando erros.
+ </summary>
+	<param name="Tmps">Arraylist contendo arquivos temporários.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ListaDir(System.String,System.String)">
+	<summary>
+ Retorna lista de arquivos contidos no diretório
+ </summary>
+	<param name="Diretorio">Caminho para disco onde será feita a pesquisa.</param>
+	<returns>Arraylist contendo os arquivos pesquisados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.WebConn(System.String)">
+	<summary>
+ Retorna connectionstring específico do webconfig &gt; connectionstring.
+ </summary>
+	<param name="param">Identificação do connectionstring desejado.</param>
+	<returns>Objeto connectionstringsettings obtido a partir do configurationmanager.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.StrConnObj(System.Object,System.Object[])">
+	<summary>
+ Retorna um connectionstring a partir da informação de um connectionstring ou string indicativa da conexão no WebConfig.
+ </summary>
+	<param name="StrConn">Connectionstring ou nome da conexao no webconfig (ex: "STRTAREFA", "ProviderName:MySQL.Data.MySQLClient;Server:127.0.0.1;Database:data;Uid:usuario;Pwd:senha;" ou "STRTAREFA;USER:usuario;PASSWORD:senha").</param>
+	<returns>Objeto connectionstring instanciado.</returns>
+	<remarks>Caso seja passada string, programador poderá fazer uso de complementos do tipo: "strGerador;user:estagiario;password:estag".
+ Isso corresponde a obter os dados da conexão do WebConfig com nome de strGerador e substituir nesta user e password.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExprSQL(System.String,System.String,System.String,System.String,Sync.Icraft.IcftBase.ExprSQLTipo)">
+	<summary>
+ Obtém string formatada considerando SELECT e DELETE ref à tabela a ser consultada, filtro e expressão de ordenação.
+ </summary>
+	<param name="Expressao">Expressão a ser consultada.</param>
+	<param name="TabelaouSQL">Tabela ou SQL a ser executado para obtenção da expressão.</param>
+	<param name="Filtro">Filtro no formato WHERE SQL.</param>
+	<returns>Retorna string contendo SELECT EXPRESSÃO FROM TABELAOUSQL WHERE FILTRO.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCarregaEstrut(System.String,System.Object,System.Object[])">
+	<summary>
+ Carrega estrutura de um dataset baseado em SQL em ORACLE, MySQL ou MSAccess.
+ </summary>
+	<param name="SQL">Select para obtenção da estrutura.</param>
+	<param name="StrConn">Identificador da connexão ou string da configuração no web.config.</param>
+	<returns>Retorna um dataset contendo somente a estrutura.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCarregaTop(System.Int32,System.String,System.Object,System.Object[])">
+	<summary>
+ Carrega dados de um select considerando uma quantidade máxima de registros.
+ </summary>
+	<param name="Top">Número de registros a serem carregados a partir do topo.</param>
+	<param name="SQL">Expressão sql.</param>
+	<param name="StrConn">Identificador da conexão ou string de configuração no web.config.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<returns>Retorna um dataset contendo os dados dos registros selecionados.</returns>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCarrega(System.String,System.Object,System.Object[])">
+	<summary>
+ Carrega dados de um select.
+ </summary>
+	<param name="SQL">Expressão sql.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<returns>Retorna um dataset contendo os dados dos registros selecionados.</returns>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSGrava(System.String,System.Object,System.Object[])">
+	<summary>
+ Executa um comando de gravação conforme sql e parâmetros.
+ </summary>
+	<param name="SQL">Expressão sql.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSGrava(System.Collections.IList,System.Object,System.Object[])">
+	<summary>
+ Executa comandos de gravação conforme lista de sql e parâmetros.
+ </summary>
+	<param name="listaSql">Lista de instruções sql.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.DSConfig(System.Object,System.String,System.Object,System.String,System.String,System.Object,System.Object)">
+	<summary>
+ Obtém ou define parâmetro padronizado em tabela.
+ </summary>
+	<param name="StrConn">Indicador de conexão (connection string).</param>
+	<param name="Chave">Chave para leitura ou gravação.</param>
+	<param name="Tabela">Tabela de parâmetros. Por default é SYS_CONFIG_GLOBAL.</param>
+	<param name="CampoChave">Campo da tabela que armazena a chave.</param>
+	<param name="CampoConteudo">Campo da tabela que armazena o conteúdo.</param>
+	<value>Conteúdo do parâmetro para gravação.</value>
+	<returns>Conteúdo do parâmetro lido.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.DSConfigUsuario(System.Object,System.String,System.String,System.String,System.String,System.String,System.String,System.Object,System.Object)">
+	<summary>
+ Obtém ou define parâmetro de usuário específico em tabela de configuração.
+ </summary>
+	<param name="StrConn">Indicador de conexão (connection string).</param>
+	<param name="Usuario">Nome do usuário para o qual será atribuído ou obtido o parâmetro.</param>
+	<param name="Chave">Chave para leitura ou gravação.</param>
+	<param name="Tabela">Tabela de parâmetros. Por default é SYS_CONFIG_USUARIO.</param>
+	<param name="CampoChave">Campo da tabela que armazena a chave.</param>
+	<param name="CampoConteudo">Campo da tabela que armazena o conteúdo.</param>
+	<value>Conteúdo do parâmetro para gravação.</value>
+	<returns>Conteúdo do parâmetro lido.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSValor(System.String,System.String,System.Object,System.String,System.Object[])">
+	<summary>
+ Obtem um valor em uma tabela do tipo max(seq) ou count(seq), por exemplo.
+ </summary>
+	<param name="Expressao">Expressão como min(campo), max(campo) ou count(campo), por exemplo.</param>
+	<param name="TabelaouSQL">Tabela ou consulta a ser pesquisada.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config ou a própria conexão.</param>
+	<param name="Condicao">Filtro a ser aplicado na cláusula where da expressão select.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<returns>Retorna o valor de uma expressão na primeira linha do dataset resultante.</returns>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSProxSeq(System.String,System.String,System.Object,System.String,System.Object[])">
+	<summary>
+ Retorna próxima sequência de um campo numérico ou referencial.
+ </summary>
+	<param name="Campo">Campo de auto-sequenciação.</param>
+	<param name="TabelaouSQL">Nome da tabela.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config ou a própria conexão.</param>
+	<param name="Condicao">Filtro a ser aplicado na cláusula where da expressão select.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<returns>Retorna o próxima sequência.</returns>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSConcat(System.String,System.String,System.Object,System.String,System.String,System.Object[])">
+	<summary>
+ Constrói arraylist com base em expressão selecionada na tabela.
+ </summary>
+	<param name="Expressao">Campo ou expressão</param>
+	<param name="TabelaouSQL">Tabela ou SQL onde será a consulta.</param>
+	<param name="StrConn">Identificador da string de conexão configurada no web.config ou a própria conexão.</param>
+	<param name="Condicao">Filtro a ser aplicado na cláusula where da expressão select.</param>
+	<param name="Ordem">Campos para ordenação separados por vírgula.</param>
+	<param name="Params">Sequência e parâmetros do tipo ":campo1", conteudo1, ":campo2", conteudo2.</param>
+	<returns>Retorna um arraylist contendo como item o resultado da expressão por registro.</returns>
+	<remarks>Primeiro parâmetro da lista também poderá conter um paramarray contendo todos os parâmetros.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCriaComandoMySQL(System.String@,System.Object@,System.Collections.ArrayList@)">
+	<summary>
+ Cria comando para MySQL.
+ </summary>
+	<param name="SQL">SQL a ser configurado com parâmetros.</param>
+	<param name="Conexao">Conexão para acesso ao banco de dados.</param>
+	<param name="ListaParametros">Lista de parâmetros tipo ParamArray.</param>
+	<returns>Retorna comando a ser executado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCriaComandoAccess(System.String@,System.Data.OleDb.OleDbConnection@,System.Collections.ArrayList@)">
+	<summary>
+ Constrói comando para Microsoft Access.
+ </summary>
+	<param name="SQL">SQL a ser executado com parâmetros.</param>
+	<param name="Conexao">Conexão com a base de dados.</param>
+	<param name="ListaParametros">Lista de parâmetros tipo ParamArray.</param>
+	<returns>Retorna comando a ser executado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCriaComandoOracle(System.String@,System.Object@,System.Collections.ArrayList@)">
+	<summary>
+ Cria comando para Oracle.
+ </summary>
+	<param name="SQL">Comando SQL a ser executado com parâmetros.</param>
+	<param name="Conexao">Conexão com a base de dados.</param>
+	<param name="ListaParametros">Lista de parâmetros no formato ParamArray.</param>
+	<returns>Retorna comando a ser executado no adapter.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSCriaComandoSQLServer(System.String@,System.Data.SqlClient.SqlConnection@,System.Collections.ArrayList@)">
+	<summary>
+ Cria comando para SQL Server.
+ </summary>
+	<param name="SQL">Comando SQL a ser executado com parâmetros.</param>
+	<param name="Conexao">Conexão com a base de dados.</param>
+	<param name="ListaParametros">Lista de parâmetros no formato ParamArray.</param>
+	<returns>Retorna comando a ser executado no adapter.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSTipoBaseSQL(System.Object,System.Object[])">
+	<summary>
+ Retorna tipo da base de dados.
+ </summary>
+	<param name="StrConn">Identificador do connection.</param>
+	<param name="Params">Parâmetros para serem utilizados por macrosubst.</param>
+	<returns>Retorna enum TipoBaseSQL.MSAccess, MySQL ou Oracle.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSDataColumns(System.Data.DataTable,System.String)">
+	<summary>
+ Obtém um DataColumn com base em um DataTable.
+ </summary>
+	<param name="DSTab">DataTable que será utilizado como base para se obter as colunas.</param>
+	<param name="CamposTxt">Campos desejados do DataTable separados por ;.</param>
+	<returns>Retorna um DataColumn contendo os campos passados em CamposTxt que existam dentro de DSTab.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSFiltra(System.Data.DataSet,System.String)">
+	<summary>
+ Retorna um dataset filtrado
+ </summary>
+	<param name="DSCompleto">Dataset que se deseja filtrar.</param>
+	<param name="Filtro">String correspondente ao filtro.</param>
+	<returns>DataSet com o conjunto de registro correspondentes ao filtro passado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DSFiltra(System.Data.DataSet,System.String,System.String)">
+	<summary>
+ Retorna um dataset filtrado
+ </summary>
+	<param name="DSCompleto">Dataset que se deseja filtrar.</param>
+	<param name="Filtro">String correspondente ao filtro.</param>
+	<param name="Classifica">Coluna pela qual o DataSet será ordernado.</param>
+	<returns>DataSet com o conjunto de registro correspondentes ao filtro passado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TabHierarqParaMenu(System.Data.DataSet,System.String,System.String,System.String,System.Object)">
+	<summary>
+ Conversão de estrutura recursiva em tabela para hierarquia em texto tipo arraylist.
+ </summary>
+	<param name="DS">Dataset contendo recursividade.</param>
+	<param name="Chave">Campo chave da tabela.</param>
+	<param name="CampoVinc">Campo vinculado que caracteriza recursividade.</param>
+	<param name="MascNode">Campo que será apresentado como texto do node.</param>
+	<param name="Filtro">Filtro para pesquisa.</param>
+	<returns>Arraylist contendo hierarquia.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.StrExpr(System.String,System.Object[])">
+	<summary>
+ Concatena um conjunto de strings separadas ou não por um separador.
+ </summary>
+	<param name="Sep">Separador que será colocado entre as strings que serão concatenadas.</param>
+	<param name="Segmentos">Conjunto de strings que serão concatenadas.</param>
+	<returns>Retorna uma string única contendo todas as Strings presentes em Segmentos concatenadas e separadas por Sep.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.SoEmailStr(System.String)">
+	<summary>
+ Busca na string formato de emailstr apenas o trecho com o email.
+ </summary>
+	<param name="Email">Email a ser analisado.</param>
+	<returns>Trecho contendo somente o email.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.EmailStr(System.String)">
+	<summary>
+ Formata email conforme exigência dos servidores smtp, baseando-se no formato 'nome' [email@dominio.com.br].
+ </summary>
+	<param name="Email">Email a ser formatado.</param>
+	<returns>Retorna email no formato 'nome' &lt;email@dominio.com.br&gt;</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TermosStrToLista(System.Object)">
+	<summary>
+ Trata string transformando-a em arraylist de emails no formato 'nome'(email@dominio.com.br).
+ </summary>
+	<param name="Email">Email a ser tratado contendo lista separada por ponto e vírgula.</param>
+	<returns>Retorna arraylist contendo emails.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.EncrypB(System.String,System.String)">
+	<summary>
+ Transforma texto em conteúdo cripto reversível com base em chave e algorítmo próprio.
+ </summary>
+	<param name="Texto">Texto a ser criptografado.</param>
+	<param name="Chave">Chave opcional. Na falta desta, default da biblioteca será utilizada.</param>
+	<returns>Retorna texto criptografado que representa conteúdo inicial, podendo ser revertido mediante chave.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.DecrypB(System.String,System.String)">
+	<summary>
+ Reversão de conteúdo criptografado com base em chave.
+ </summary>
+	<param name="Texto">Texto criptografado para reversão.</param>
+	<param name="Chave">Chave opcional. Na falta desta, default da biblioteca será considerada.</param>
+	<returns>Retorna conteúdo original, caso chave esteja correta.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.URLJSDecode(System.String)">
+	<summary>
+ Reverte texto convertido por URLJSEncode, que tem finalidade de ocultar códigos especiais não tratáveis por GET.
+ </summary>
+	<param name="Texto">Texto codificado a ser revertido em original.</param>
+	<returns>Retorna texto revertido.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.URLJSEncode(System.String)">
+	<summary>
+ Converte texto em codificação capaz de ocultar caracteres especiais com objetivo de passar entre JAVASCRIPT e ASP.NET.
+ </summary>
+	<param name="Texto">Texto original a ser convertido.</param>
+	<returns>Retorna texto codificado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ExtendToArrayList(System.String)">
+	<summary>
+ Obtém formato extendido, armazenado em texto contínuo e prepara arraylist com as variáveis seguidas de conteúdo (:var, :conteudo, :var2, conteudo2...).
+ </summary>
+	<param name="Extend">Texto a ser analisado.</param>
+	<returns>Arraylist contendo variáveis no formato :var1, conteudo1, :var2, conteudo2...</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ObjectToByteArray(System.Object)">
+	<summary>
+ Transforma objeto em array de bytes pronto para gravar em blob.
+ </summary>
+	<param name="obj">Objeto a ser convertido em array de bytes.</param>
+	<returns>Retorna array de bytes.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.PropE(System.Object,System.String,System.Object,System.String)">
+	<summary>
+ Obtém e seta conteúdo criptografado de propriedade.
+ </summary>
+	<param name="Objeto">Objeto para o qual a propriedade será tratada.</param>
+	<param name="Propriedade">Nome da propriedade.</param>
+	<param name="Container">Container quando objeto estiver em outro continente.</param>
+	<param name="ChaveEncrypB">Chave de criptografia sendo opcional. Na falta desta, default da biblioteca será utilizada.</param>
+	<value>Valor para definição da propriedade.</value>
+	<returns>Valor obtido com base na propriedade pesquisada.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Prop(System.Object,System.String,System.Object)">
+	<summary>
+ Define ou obter propriedade de um objeto ou resultado de uma busca em um container.
+ </summary>
+	<param name="Objeto">Objeto ou string contendo o nome do objeto a ser procurado.</param>
+	<param name="Propriedade">Nome da propriedade a ser definida.</param>
+	<param name="Container">Caso esse parâmetro não seja informado, propriedade do objeto será definida. Caso esteja presente, deverá indicar a página ou colleção de controles onde o nome do objeto será procurado.</param>
+	<value>Conteúdo a ser atribuído ao objeto ou resultado de pesquisa.</value>
+	<returns>Conteúdo obtido a partir do objeto ou resultado da pesquisa.</returns>
+	<remarks>Todas as propriedades precisam de prévia programação. Ao informar novidade em 'get', informe também em 'set' e vice-versa.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MacroSubstSQLText(System.String,System.Object[])">
+	<summary>
+ Retorna SQL traduzido conforme retorno de MACROSUBSTSQL não prevendo a utilização de variáveis bind (tudo no texto).
+ </summary>
+	<param name="SQLRef">SQL a ser tratado, podendo o mesmo possuir referências :VARIAVEL, [:CAMPO] ou [:valor.CAMPO] para macrosubstituição.</param>
+	<param name="ListaDeOrigens">Lista de origens podendo ser LOGON, CONTAINER ou parâmetros nominais por exemplo: VARIAVEL, "CONTEUDO", :OUTRAVAR, 10.</param>
+	<returns>Retorna SQL tratado, com variáveis convertidas em texto.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MacroSubst(System.String@,System.Object[])">
+	<summary>
+ Obsoleta: Rotina de macrosubstituição de variáveis conforme fontes especificadas como lista de parâmetros, formulários, logon, etc. Esta função será descontinuada.
+ </summary>
+	<param name="SQLRef">Texto a ser tratado, onde será efetuada a busca por parâmetros como [:variavel].</param>
+	<param name="ListaOrigens">Origens possíveis para pesquisa das variáveis.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MacroSubstSQL(System.String@,System.Collections.ArrayList@,System.Object[])">
+	<summary>
+ Troca em TEXTO variáveis a partir de fontes LOGON e CONTAINERS, podendo retornar em variáveis bind ou no próprio SQL (PARAMS = Nothing).
+ </summary>
+	<param name="SQLRef">Texto SQL contendo variáveis: SELECT [:valor.CAMPO], * FROM TABELA WHERE CAMPO=[:CAMPO]...</param>
+	<param name="Params">Lista de parâmetros conhecidos passados e retorno de variáveis bind para submissão ao interpretador SQL.</param>
+	<param name="ListaOrigens">Lista de origens podendo ser LOGON ou CONTAINERS, sendo a busca realizada por FINDGERAL (filhos e em seguida pais).</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.OrigemParam(System.Object,System.String)">
+	<summary>
+ Intepreta parâmetro solicitado com base nas possibilidades de pesquisa, sendo logon e continentes em geral as fontes.
+ </summary>
+	<param name="Origem">Origem de pesquisa.</param>
+	<param name="Param">Parâmetro a ser procurado na origem.</param>
+	<returns>Retorna o parâmetro como valor.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.JSExpr(System.String)">
+	<summary>
+ Coloca Conteudo no formato de uma expressão JavaScript Válida.
+ </summary>
+	<param name="Conteudo">O conteúdo a ser convertido.</param>
+	<returns>Retorna Conteudo convertido em uma expressão JavaScript válida.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.SqlExpr(System.Object,System.String)">
+	<summary>
+ Retorna um conteúdo formatado de acordo com seu tipo para sua utilização em expressões SQL.
+ </summary>
+	<param name="Conteudo">Conteúdo a ser formatado.</param>
+	<returns>Texto para concatenação em expressões sql.</returns>
+	<remarks>Nem todos os tipos estão tratados. Serão configurados conforme a necessidade.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NZV(System.Object,System.Object)">
+	<summary>
+ Retorna valor padrão se for Nothing, Nulo ou Vazio (ou zero no caso de tipo numérico).
+ </summary>
+	<param name="Valor">Valor a ser checado.</param>
+	<param name="Def">Default a ser retornado caso seja Nothing, Nulo ou vazio.</param>
+	<returns>Valor checado ou valor default caso Nothing, Nulo ou vazio (zero se o tipo for numérico).</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NZ(System.Object,System.Object)">
+	<summary>
+ Caso o objeto inicial não exista (ismissing) ou seja nulo (dbnull), retorna o segundo parâmetro.
+ </summary>
+	<param name="Valor">Parâmetro a ser analisado.</param>
+	<param name="Def">Parâmetro default caso o primeiro parâmetro não exista ou seja nulo.</param>
+	<returns>Retorna primeiro parâmetro ou segundo caso o primeiro não exista ou seja nulo, sempre convertendo para o tipo do segundo parâmetro.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ParamArrayToArrayList(System.Object[])">
+	<summary>
+ Transforma um paramarray em arraylist.
+ </summary>
+	<param name="PARAMS">Lista de parâmetros podendo ser um arraylist ou paramarray.</param>
+	<returns>Retornará um arraylist contendo a lista de parâmetros.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ByteArrayToObject(System.Byte[])">
+	<summary>
+ Transforma array de bytes em objeto.
+ </summary>
+	<param name="Bytes">Array de bytes a ser transferida para objeto.</param>
+	<returns>Objeto criado a partir do array de bytes.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CTypeStr(System.Object,System.String)">
+	<summary>
+ Converte para outro tipo (ctype) especificado por uma string. 
+ </summary>
+	<param name="Obj">Objeto original.</param>
+	<param name="Tipo">String que especifica o tipo ex: System.String, System.Int32, etc.</param>
+	<returns>Retorna o objeto no tipo especificado.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ItemsToArrayList(System.Object,System.Object)">
+	<summary>
+ Extrai atributos de registros ou items do objeto. Utilizada para obter campo de um determinado dataset ou dataview.
+ </summary>
+	<param name="Obj">Objeto a ser explorado como por exemplo: Dataset.Tables(0).Rows.</param>
+	<param name="PropRel">Propriedade relacionada existente em todos os registros como nome ou número de um campo.</param>
+	<returns>Retorna o campo de cada registro como um índice de ArrayList.</returns>
+	<remarks>Exemplo: ItemsToArrayList(Dataset.Tables(0).Rows, "MeuCampo")</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ItemsToObject(System.Object,System.Object)">
+	<summary>
+ Obtém itens de um objeto considerando uma propriedade específica.
+ </summary>
+	<param name="Obj">Objeto que contém a lista de itens (rows por exemplo).</param>
+	<param name="PropRel">Nome da propriedade ou campo a ser obtido para cada linha.</param>
+	<returns>Retorna uma lista, que poderá ser atribuída ao datasource para preenchimento automático de combox.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Idioma.DoAmbiente(System.Web.UI.Page)">
+	<summary>
+ Idioma definido para o ambiente.
+ </summary>
+	<param name="Page">Página a ser avaliada.</param>
+	<value>Valor TipoIdioma a ser definido para contexto do ambiente.</value>
+	<returns>Valor definido TipoIdioma no contexto do ambiente.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Idioma.Verifica(System.Web.UI.Page)">
+	<summary>
+ Verifica especificação da página para definição de contexto do ambiente.
+ </summary>
+	<param name="Page">Página a ser tratada.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Idioma">
+	<summary>
+ Tratamento de idioma padronizado para condicionamento de ambiente.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Id">
+	<summary>
+ Identificação para armazenamento de logon do tipo 'GERAL' ou algum específico para múltiplos logons.
+ </summary>
+	<value>Especificação do tipo de logon.</value>
+	<returns>Especificação do tipo de logon.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Usuario">
+	<summary>
+ Usuário que efetuou logon.
+ </summary>
+	<value>Login do usuário que efetuou logon.</value>
+	<returns>Login do usuário que efetou logon.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Momento">
+	<summary>
+ Momento de logon.
+ </summary>
+	<value>Momento (data e hora) de logon.</value>
+	<returns>Momento (data e hora) de logon.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Site">
+	<summary>
+ Nome do site.
+ </summary>
+	<value></value>
+	<returns>Nome do site.</returns>
+	<remarks>Nome do site.</remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Senha">
+	<summary>
+ Senha de acesso.
+ </summary>
+	<value>Senha de acesso.</value>
+	<returns>Senha de acesso.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.ExtendedProps(System.String)">
+	<summary>
+ Outras propriedades a serem armazenadas pelo Logon.
+ </summary>
+	<param name="Propriedade">Nome da propriedade.</param>
+	<value>Valor da propriedade.</value>
+	<returns>Valor da propriedade armazenada.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.LogonSession.Attributes(System.String)">
+	<summary>
+ Acesso aos atributos e propriedades expandidas.
+ </summary>
+	<param name="Nome">Nome da propriedade tratada.</param>
+	<value>Valor da propriedade tratada.</value>
+	<returns>Valor da propriedade solicitada.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.LogonSession.#ctor(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Criação de login para registro de acesso de usuário.
+ </summary>
+	<param name="Pagina">Página na qual é efetuado o login.</param>
+	<param name="Usuario">Usuário que efetua acesso.</param>
+	<param name="Senha">Senha do usuário.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.LogonSession">
+	<summary>
+ Classe para registro de logon de usuário e variáveis relacionadas.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.CarregaDef(System.Data.DataSet@,System.String,System.String,System.String,System.Object[])">
+	<summary>
+ Carrega definições obtidas através do gerador.
+ </summary>
+	<param name="ds">Lista de definições de campos que será retornada.</param>
+	<param name="StrGerador">String de conexão com gerador.</param>
+	<param name="Sistema">Nome do sistema.</param>
+	<param name="Tabela">Nome da tabela desejada.</param>
+	<param name="Params">Parâmetros de filtro.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.CarregaReg(System.Object@,System.String,System.Object@,System.Object@,System.Boolean,System.Object[])">
+	<summary>
+ Uma das formas de carga de registro, considerando seu conteúdo.
+ </summary>
+	<param name="ListaControles">Lista de controles a serem tratados.</param>
+	<param name="Prefixo">Prefixo dos campos a serem preenchidos.</param>
+	<param name="Registros">Dataset contendo registros a serem pesquisados.</param>
+	<param name="Registro">Número do registro a ser apresentado.</param>
+	<param name="SomenteEstrut">Obtenção somente da estrutura.</param>
+	<param name="Params">Parâmetros para filtro das opções de registro.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.CarregaReg(System.Object,System.String,System.String,System.String,System.Object,System.Object[])">
+	<summary>
+ Uma das opções de carga de registros em campos.
+ </summary>
+	<param name="ListaControles">Lista de controles.</param>
+	<param name="Prefixo">Prefixo dos controles desejados.</param>
+	<param name="SelectOuTabela">Select ou nome da tabela a ser pesquisa.</param>
+	<param name="Filtro">Filtro para composição do SQL de pesquisa.</param>
+	<param name="StrConn">Conexão para pesquisa das informações.</param>
+	<param name="Params">Parâmetros de filtro para pesquisa.</param>
+	<returns>Dataset obtido mediante SQL resultante do SelectouTabela, Filtro e Params.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.ExcluiReg(System.Object,System.String,System.String,System.String,System.Object,System.Object[])">
+	<summary>
+ Exclusão de registro.
+ </summary>
+	<param name="ListaControles">Lista de controles.</param>
+	<param name="Prefixo">Prefixo dos controles considerados.</param>
+	<param name="DeleteOuTabela">SQL de deleção ou tabela.</param>
+	<param name="Filtro">Filtro adicional caso exista.</param>
+	<param name="StrConn">Nome da conexão.</param>
+	<param name="Params">Parâmetros para filtro.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.GravaReg(System.Object,System.String,System.String,System.String,System.Object,System.Object[])">
+	<summary>
+ Gravação de registro para formulário.
+ </summary>
+	<param name="ListaControles">Opções de campos a serem pesquisados.</param>
+	<param name="Prefixo">Prefixo dos campos a serem pesquisados.</param>
+	<param name="SqlOuTabela">SQL ou tabela onde ocorrerá o registro.</param>
+	<param name="Filtro">Filtro adicional caso necessário.</param>
+	<param name="StrConn">Nome de conexão para registro.</param>
+	<param name="Params">Parâmetros adicionais para registro.</param>
+	<returns>TRUE caso registro ocorra satisfatoriamente ou FALSE caso contrário.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.IncluiReg(System.Object,System.String,System.String,System.String,System.Object,System.Object[])">
+	<summary>
+ Inclusão de registro com base em formulário.
+ </summary>
+	<param name="ListaControles">Opções de campos a serem pesquisados.</param>
+	<param name="Prefixo">Prefixo dos campos a serem pesquisados.</param>
+	<param name="SqlOuTabela">SQL ou tabela onde ocorrerá o registro.</param>
+	<param name="Filtro">Filtro adicional caso necessário.</param>
+	<param name="StrConn">Nome de conexão para registro.</param>
+	<param name="Params">Parâmetros adicionais para registro.</param>
+	<returns>TRUE caso registro ocorra satisfatoriamente ou FALSE caso contrário.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.AlteraReg(System.Object,System.String,System.String,System.String,System.String,System.Object,System.Object[])">
+	<summary>
+ Alteração de registro com base em formulário.
+ </summary>
+	<param name="ListaControles">Opções de campos a serem pesquisados.</param>
+	<param name="Prefixo">Prefixo dos campos a serem pesquisados.</param>
+	<param name="SqlOuTabela">SQL ou tabela onde ocorrerá o registro.</param>
+	<param name="Chave">Especificação de chave anterior para troca.</param>
+	<param name="Filtro">Filtro adicional caso necessário.</param>
+	<param name="StrConn">Nome de conexão para registro.</param>
+	<param name="Params">Parâmetros adicionais para registro.</param>
+	<returns>TRUE caso registro ocorra satisfatoriamente ou FALSE caso contrário.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Form.Conteudo(System.Object,System.String,System.String)">
+	<summary>
+ Conteúdo dos controles para registro em texto em algum local.
+ </summary>
+	<param name="Container">Container onde está os controles.</param>
+	<param name="Prefixo">Prefixo a ser pesquisado.</param>
+	<param name="Atribs">Atributos adicionais.</param>
+	<value>Definição de conteúdo a ser atribuída aos controles.</value>
+	<returns>Definição de conteúdo obtida a partir dos controles.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.FindControl(System.Object,System.String,System.Collections.ArrayList)">
+	<summary>
+ Busca Controle a partir do container informado, procurando também em todos os filhos. Utilizar FINDCONTROLESPECIAL para encontrar controle também em Paineis.
+ </summary>
+	<param name="Container">Objeto a partir do qual a busca será iniciada.</param>
+	<param name="Nome">Nome do contrle a ser procurado.</param>
+	<returns>Retorna o controle caso seja encontrado entre as dependências do CONTAINER ou NOTHING se o contrário.</returns>
+	<remarks>Utilizar FINDGERAL para buscar entre os filhos e pais do container.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.FindGeral(System.Object,System.String,System.Collections.ArrayList)">
+	<summary>
+ Busca controle tanto nos filhos como nos pais. Começa procurando entre os filhos e, depois, vai subindo até o topo.
+ </summary>
+	<param name="Container">Objeto a partir do qual a procura se inicia. Filhos deste terão a prioridade.</param>
+	<param name="Nome">Nome do controle a ser procurado.</param>
+	<param name="NaoProcurarEm">Lista negra. Objetos que estiverem esta lista serão evitados.</param>
+	<returns>Retorna controle ou NOTHING caso a busca não tenha sucesso.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.Containers(System.Object)">
+	<summary>
+ Obtém lista de controlcollections existentes entre as dependências da Raíz.
+ </summary>
+	<param name="Raiz">Objeto a partir da qual a busca se iniciará.</param>
+	<returns>Retorna uma colleção de Controles ou ControlCollections existentes a partir da raíz sendo a busca recursiva.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Form.Campos(System.Object,System.String)">
+	<summary>
+ Obtenção de arraylist contendo nomes dos campos conforme prefixo.
+ </summary>
+	<param name="Container">Container onde ocorre a pesquisa.</param>
+	<param name="Prefixo">Prefixo pesquisado.</param>
+	<returns>Arraylist contendo nomes dos campos.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Form">
+	<summary>
+ Classe para tratamento de form icraft.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.EraNulo(System.Object)">
+	<summary>
+ Avalia se controle possui conteúdo vazio/nulo/nothing ou similar.
+ </summary>
+	<param name="Ctl">Controle pesquisado.</param>
+	<value>TRUE se conteúdo vazio ou FALSE caso não.</value>
+	<returns>TRUE se conteúdo vazio ou FALSE caso não.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.ValorAnterior(System.Object)">
+	<summary>
+ Acesso ao valor anterior daquele controle, registrado como atributo.
+ </summary>
+	<param name="Ctl">Controle pesquisado.</param>
+	<value>Valor anterior a ser definido.</value>
+	<returns>Valor anterior obtido.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.ValorAtual(System.Object,System.Boolean)">
+	<summary>
+ Pesquisa de valor atual do controle.
+ </summary>
+	<param name="ctl">Controle pesquisado.</param>
+	<param name="RegNovo">TRUE caso seja registro novo (conteúdo anterior inexistente, é claro!).</param>
+	<value>Valor atual do controle pesquisado.</value>
+	<returns>Valor atual do controle pesquisado.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.Valor(System.Object,System.Object)">
+	<summary>
+ Conteúdo atual do controle.
+ </summary>
+	<param name="Ctl">Controle pesquisado.</param>
+	<param name="Texto">Conteúdo caso campo esteja vazio (valor default).</param>
+	<value>Valor atual do campo lido ou para definição.</value>
+	<returns>Valor atual do campo lido ou para definição.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Controle.CampoParaControle(System.Object,System.Object)">
+	<summary>
+ Prepara conteúdo a ser definido em campo (não define, apenas prepara).
+ </summary>
+	<param name="Valor">Valor a ser atribuído ao controle.</param>
+	<param name="Ctl">Controle que receberá a definição.</param>
+	<returns>Conteúdo definido para o controle.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.ValorPadrao(System.Object)">
+	<summary>
+ Definição de valor padrão para controle.
+ </summary>
+	<param name="ctl">Controle tratado para valor padrão.</param>
+	<value>Valor padrão do controle.</value>
+	<returns>Valor padrão do controle.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.Tipo(System.Object)">
+	<summary>
+ Definição de tipo do controle.
+ </summary>
+	<param name="Ctl">Controle.</param>
+	<value>Tipo do controle.</value>
+	<returns>Tipo do controle.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.Auto(System.Object)">
+	<summary>
+ Definição automática para controle.
+ </summary>
+	<param name="ctl">Controle.</param>
+	<value>Definição de forma automática a ser considerada.</value>
+	<returns>Definição de forma automática a ser considerada.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.Formato(System.Object)">
+	<summary>
+ Formato do controle.
+ </summary>
+	<param name="Ctl">Controle tratado.</param>
+	<value>Formato registrado para aquele controle.</value>
+	<returns>Formato registrado para aquele controle.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.Mascara(System.Object)">
+	<summary>
+ Definição de máscar de preenchimento para controle.
+ </summary>
+	<param name="Ctl">Controle tratado.</param>
+	<value>Conteúdo da máscara do controle.</value>
+	<returns>Conteúdo da máscara do controle.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Controle.MascaraProgress(System.Object)">
+	<summary>
+ Definição de máscara para entrada progressiva, que formata campo e valida mediante entrada de caracter.
+ </summary>
+	<param name="Ctl">Controle tratado.</param>
+	<value>Valor para máscara de entrada.</value>
+	<returns>Valor da máscara de entrada.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Controle.AplicaMascara(System.Object)">
+	<summary>
+ Retorna texto javascript para atribuição da máscara, considerando funções em icraft.js.
+ </summary>
+	<param name="Ctl">Controle tratado.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Controle">
+	<summary>
+ Classe para facilitar acesso aos controles.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementoStr.ToString">
+	<summary>
+ Retorna string representando a forma de estilo.
+ </summary>
+	<returns>String representando a forma de estilo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementoStr.#ctor(System.String,System.String)">
+	<summary>
+ Cria nova forma de estilo.
+ </summary>
+	<param name="AtributoStr">Atributo.</param>
+	<param name="Separador">Separador.</param>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.Nome">
+	<summary>
+ Nome do atributo, parte à esqueda na definição.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.Conteudo">
+	<summary>
+ Conteúdo da definição, parte direita no termo.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.ConteudoValor">
+	<summary>
+ Extração de valor do conteúdo, quando for acompanhado de termos como "PX" (pixels).
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.ConteudoUnidade">
+	<summary>
+ Unidade do conteúdo, como "PX" (pixels).
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.Attributes(System.String)">
+	<summary>
+ Acesso ao atributo definido para a classe.
+ </summary>
+	<param name="Nome">Nome do atributo.</param>
+	<value>Valor do atributo.</value>
+	<returns>Valor do atributo.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementoStr.Operador">
+	<summary>
+ Método de operação entre classes, para soma ou exclusão.
+ </summary>
+	<value>Tipo de operação.</value>
+	<returns>Tipo de operação.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ElementoStr">
+	<summary>
+ Classe que armazena detalhes sobre elemento de estilo do tipo "height:300px".
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Elementos">
+	<summary>
+ Lista de elementos.
+ </summary>
+	<value>Lista de elementos.</value>
+	<returns>Lista de elementos.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Separador">
+	<summary>
+ Especificação de separador.
+ </summary>
+	<value>Texto contendo separador.</value>
+	<returns>Texto contendo separador.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.ItemSeparador">
+	<summary>
+ Separador de itens.
+ </summary>
+	<value>Separador de itens.</value>
+	<returns>Separador de itens.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementosStr.SeparaExpr(System.String)">
+	<summary>
+ Separa parâmetros.
+ </summary>
+	<param name="Separador">Separador.</param>
+	<returns>String contendo itens separados.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementosStr.#ctor(System.String,System.String,System.String)">
+	<summary>
+ Criação da lista de parâmetros com base em texto e separador.
+ </summary>
+	<param name="AtributosStr">Lista de atributos.</param>
+	<param name="SeparadorTxt">Separador (ex.: border:1px  ; padding:1px).</param>
+	<param name="ItemSeparadorTxt">Separador de atributo (border  :  1px).</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementosStr.ToStyleStr(System.String,System.String)">
+	<summary>
+ Transforma estilo em string.
+ </summary>
+	<param name="SeparadorTxt">Separador a ser utilizado.</param>
+	<param name="ItemSeparadorTxt">Atribuidor a ser utilizado.</param>
+	<returns>Texto representando estilo com separador e atribuidor escolhidos.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementosStr.ToString">
+	<summary>
+ Texto representando estilo considerando atributos de separação definidos previamente.
+ </summary>
+	<returns>Texto representando estilo.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Items(System.Int32)">
+	<summary>
+ Lista de itens do estilo.
+ </summary>
+	<param name="Indice">Índice numérico para acesso ao item do estilo.</param>
+	<value>Valor a ser definido.</value>
+	<returns>Valor obtido a partir do item consultado.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Items(System.String)">
+	<summary>
+ Pesquisa de itens por nome do termo em estilo.
+ </summary>
+	<param name="Nome">Termo pesquisado.</param>
+	<value>Valor a ser atribuído.</value>
+	<returns>Valor obtido a partir do termo.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Count">
+	<summary>
+ Quantidade de itens no estilo.
+ </summary>
+	<value>Quantidade de itens no estilo.</value>
+	<returns>Quantidade de itens no estilo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ElementosStr.AddStr(System.String)">
+	<summary>
+ Itens a serem adicionados ao estilo.
+ </summary>
+	<param name="AtributosStr">Itens a serem adicionados no estilo.</param>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ElementosStr.Exists(System.String)">
+	<summary>
+ Verifica a existência ou não do termo no estilo.
+ </summary>
+	<param name="Nome">Termo a ser pesquisado.</param>
+	<value>TRUE caso exista ou FALSE caso não seja encontrado.</value>
+	<returns>TRUE caso exista ou FALSE caso não seja encontrado.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ElementosStr">
+	<summary>
+ Classe para armazenar e operar elementostr.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ContaTempo.UltimoRegistro">
+	<summary>
+ Momento de último registro, que corresponde ao ponto de inicialização da contagem.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ContaTempo.Registra">
+	<summary>
+ Registra momento atual como início da contagem.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.ContaTempo.TempoDecorrido(System.Boolean)">
+	<summary>
+ Quantidade de segundos passados desde o último registro.
+ </summary>
+	<param name="RegistraOutro">Obtém segundos e inicia nova contagem.</param>
+	<value>Segundos passados desde o último registro.</value>
+	<returns>Segundos passados desde o último registro.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.ContaTempo.#ctor">
+	<summary>
+ Cria contagem de tempo, registrado momento inicial como atual.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ContaTempo">
+	<summary>
+ Classe para contagem de tempo. TempoDecorrido retorna o total de segundos passados desde o último registro.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Soma(System.String,System.String)">
+	<summary>
+ Soma de estilos.
+ </summary>
+	<param name="Esse">Conjunto inicial de estilo "border:1px;padding:2px".</param>
+	<param name="MaisEsse">Adicional de estilos a serem incluídos no estilo inicial no mesmo formato "margin:1px;background-color:#f0f0f0".</param>
+	<returns>Retorna estilo resultante considerando a soma dos dois sendo eliminadas as redundâncias.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Subtrai(System.String,System.String)">
+	<summary>
+ Retira um estilo específico do estilo inicial.
+ </summary>
+	<param name="Esse">Lista de estilos inicial.</param>
+	<param name="MenosEsse">Estilo a ser retirado do inicial.</param>
+	<returns>Estilo resultante, sem os termos solicitados para retirada.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.ConteudoValor(System.String)">
+	<summary>
+ Obtém valor do estilo, sendo eliminado o termo de unidade, por exemplo.
+ </summary>
+	<param name="Param">Termo do qual queremos o valor.</param>
+	<returns>Valor daquele termo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.ConteudoUnidade(System.String)">
+	<summary>
+ Unidade do termo.
+ </summary>
+	<param name="Param">Termo desejado.</param>
+	<returns>Retorna unidade daquele termo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Variavel(System.String)">
+	<summary>
+ Nome do termo solicitado.
+ </summary>
+	<param name="Param">Estilo solicitado.</param>
+	<returns>Nome da variável daquele estilo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Conteudo(System.String)">
+	<summary>
+ Conteúdo do termo solicitado.
+ </summary>
+	<param name="Param">Termo a ser tratado.</param>
+	<returns>Conteúdo definido para aquele termo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Opera(System.String,System.String,System.String)">
+	<summary>
+ Opera dois estilos com base em um operador.
+ </summary>
+	<param name="Esse">Primeiro estilo.</param>
+	<param name="ComEsse">Segundo estilo.</param>
+	<param name="Operador">Tipo de operação.</param>
+	<returns>Estilo resultante.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Estilo.Concatena(System.Object[])">
+	<summary>
+ Concatena estilos com base em um array de objetos.
+ </summary>
+	<param name="PARAM">Lista de estilos a serem concatenados.</param>
+	<returns>String consolidando todos os estilos concatenados.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Estilo">
+	<summary>
+ Operação com estilos permitindo inclusão, exclusão e atualização de conteúdo.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.MapPath">
+	<summary>
+ Classe para tratar sitemap como array de urls retornando anterior e próximo.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.ArrayV">
+	<summary>
+ Array valorado, para pesquisas de um modo geral, onde aplicamos um valor de atributo
+ para substituição do termo predicado
+ IMPORTANTE:: termo iniciado, mas a conclusão final depende de testes de performance 
+  entre a utilização desta com resize e a utilização do PARAMTOARRAYLIST, já com todas
+  as propriedades declaradas nativamente.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.SiteMapProviderGeral.#ctor(System.Object,System.Boolean,System.String,System.String,System.String,System.Boolean)">
+	<summary>
+ Classe SiteMapProviderGeral está preparada para ICFTMENU, TREEEVIEW ou TREENODE.
+ </summary>
+	<param name="Fonte">ICFTMENU, TREEEVIEW ou TREENODE.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.HTML.Table_Sentido">
+	<summary>
+ Orientação corresponde ao sentido inicial de preenchimento da tabela. Horizontal para preencher da esquerda para direita e vertical para preencher de cima para baixo.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.HTML.A_HRef(System.String,System.String,System.Object[])">
+	<summary>
+ a href cria uma referência de link em um determinado código html.
+ </summary>
+	<param name="html">Código html que aparecerá sublinhado sendo o link para a execução desejada.</param>
+	<param name="link">URL ou código de execução desejada.</param>
+	<param name="ListaEstilos">Lista de estilos esperada podendo ser ":link", "border:1px solid red;background-color:#ff0000".</param>
+	<returns>Um html contendo o código com a referência.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.HTML.StrStyle(System.String,System.Collections.ArrayList)">
+	<summary>
+ Função privada para busca de estilo.
+ </summary>
+	<param name="Tipo">Tipo a ser pesquisado: row, col, cell, rowalt, colalt, tab, etc...</param>
+	<param name="Estilos">Lista de estilos no formato ":row", "background-color:#f8f8f8", ":rowalt", "background-color:#e8e8e8", ":cell", "padding:4px".</param>
+	<returns>Retorna a string contendo a formatação a ser inserida na tag contendo o estilo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.HTML.StrStyle(System.String,System.Collections.ArrayList,System.Int32)">
+	<summary>
+ Simplifica o processo de obtenção do estilo para linhas alternadas pela inclusão de alt após o tipo.
+ </summary>
+	<param name="Tipo">Tipo que pode ser row, col, cell, tab etc...</param>
+	<param name="Estilos">Lista de estilos onde será procurado o tipo.</param>
+	<param name="Nr">Número da linha ou coluna que está sendo criada.</param>
+	<returns>Retorna string contendo estilo a ser aplicado no tag.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.HTML.Table(System.Collections.ArrayList,Sync.Icraft.IcftBase.HTML.Table_Sentido,System.Int32,System.Int32,System.Object[])">
+	<summary>
+ Cria código de tabela seguindo um determinado sentido considerando uma lista de valores sequenciados.
+ </summary>
+	<param name="Lista">Lista de conteúdos sequenciados.</param>
+	<param name="Sentido">Sentido pode ser horizonta para preenchimento da tabela da esquerda para direita e vertical para preencher de cima para baixo.</param>
+	<param name="QtdCols">Quantidade de colunas. Será priorizada esta quantidade caso seja sentido horizontal.</param>
+	<param name="QtdLinhas">Quantidade de linhas. Será priorizada esta quantidade caso seja sentido vertical.</param>
+	<param name="ListaEstilos">Lista de estilos configurados para preenchimento dos tags table, tr e td.</param>
+	<returns>Retorna o código html da tabela contendo os valores.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.HTML">
+	<summary>
+ Recurso para simplificar a criação de algumas tags html.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegexGroupReplace(System.String,System.String,System.String,System.Object)">
+	<summary>
+ Substitui um grupo regex no texto.
+ </summary>
+	<param name="Texto">Texto que será avaliado.</param>
+	<param name="Mascara">Expressão regex para grupos.</param>
+	<param name="TrocarPara">Texto que substituirá o grupo regex encontrado.</param>
+	<param name="Grupo">Grupo regex a ser substituído.</param>
+	<returns>Retorna texto com grupo substituído por trocarpara com base na expressão regex.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegexGroup(System.String,System.String,System.Object)">
+	<summary>
+ Retorna um grupo regex.
+ </summary>
+	<param name="Texto">Texto de onde será extraído o grupo.</param>
+	<param name="Mascara">Expressão regex para análise do texto.</param>
+	<param name="Grupo">Grupo regex a ser extraído.</param>
+	<returns>Retorna grupo regex conforme análise do texto com base na máscara.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegexMatches(System.String,System.String)">
+	<summary>
+ Retorna MATCHES de uma consulta regex (apenas para simplificar código).
+ </summary>
+	<param name="Texto">Texto a ser pesquisado.</param>
+	<param name="Mascara">Máscara utilizada para pesquisa.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegexToArrayList(System.String,System.String,System.Int32,System.String)">
+	<summary>
+ Interpreta uma string utiliza regex retornando um arraylist mediante a escolha de um grupo.
+ </summary>
+	<param name="Texto">Texto a ser interpretado.</param>
+	<param name="Mascara">Máscara regex utilizada para interpretar o texto.</param>
+	<param name="Grupo">Grupo desejado sendo grupo zero o padrão (todo o texto).</param>
+	<returns>Retorna um arraylist contendo como índice cada ocorrência no formato da máscara no texto.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegexMascTags(System.String,System.Int32,System.Int32)">
+	<summary>
+ Rotina recursiva para regex.match de tags. Apenas retorna a máscara. Informe níveis possíveis para aquela tag.
+ </summary>
+	<param name="Tag">Tag inicial que também é utilizada como texto recursivo.</param>
+	<param name="Niveis">Níveis possíveis para primeira tag.</param>
+	<param name="NivelAtual">Indicador de nível para chave recursiva.</param>
+	<returns>Texto contendo máscara.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.RegexHtml">
+	<summary>
+ Objecto para manipulação de texto como html.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MapPathAntes(System.String,System.String)">
+	<summary>
+ Retorna url anterior à página informada considerando sitemap.
+ </summary>
+	<param name="DiretorioMap">Diretório onde pode ser encontrado o sitemap.</param>
+	<param name="Pag">Página atual.</param>
+	<returns>Retorna página anterior caso a atual seja encontrada ou a primeira caso não seja encontrada.</returns>
+	<remarks>Para compatibilidade, melhor utilizar mappath.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MapPathDepois(System.String,System.String)">
+	<summary>
+ Retorna url posterior à página informada considerando sitemap.
+ </summary>
+	<param name="DiretorioMap">Diretório onde pode ser encontrado o sitemap.</param>
+	<param name="Pag">Página atual.</param>
+	<returns>Retorna página posterior caso a atual seja encontrada ou a última caso não seja encontrada.</returns>
+	<remarks>Para compatibilidade, melhor utilizar mappath.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Paginas(System.String,System.String)">
+	<summary>
+ Retorna expressão com página atual e total de páginas.
+ </summary>
+	<param name="DiretorioMap">Diretório onde pode ser encontrado o sitemap.</param>
+	<param name="Pag">Página atual.</param>
+	<returns>Retorna uma expressão que mostra página atual e quantidade de páginas.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.Logon(System.Web.UI.Page)">
+	<summary>
+ Acessa parâmetros armazenados sobre o login do usuário em uma determinada tela de autenticação. Utilize LOGIN para logar e LOGOFF para "deslogar".
+ </summary>
+	<param name="Pagina">Página do requisitante ('me' ou 'page').</param>
+	<value>LogonSession, que contém informações de usuário, momento de logon entre outras.</value>
+	<returns>LogonSession, que contém informações de usuário, momento de logon entre outras.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Login(System.Web.UI.Page,System.String,System.String,System.Object,System.String,System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ Efetua login fazendo registro dos dados de usuário.
+ </summary>
+	<param name="Pagina">Passa a página em questão (me ou page)</param>
+	<param name="Usuario">Usuário que está sendo submetido.</param>
+	<param name="Senha">Senha do usuário.</param>
+	<param name="StrConn">Nome da conexão no webconfig para consulta de usuário.</param>
+	<param name="TabelaUsuario">Tabela onde são armazenados os usuários.</param>
+	<param name="CampoUsuario">Campo que armazena o nome do usuário.</param>
+	<param name="CampoSenha">Campo que armazena a senha.</param>
+	<param name="RedirAuto">Redireciona automaticamente para a página.</param>
+	<returns>Retorna true caso ocorra o logon sendo LOGON(SESSION) 
+ registrada corretamente e false caso ocorra algum erro.</returns>
+	<remarks>A função permite busca mediante o acesso a base. Para isso, 
+ utilizar como senha na base: [PROVIDER:strconexao], onde conexão corresponde
+ à conexão no webconfig.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Logoff(System.Web.UI.Page)">
+	<summary>
+ Cancela sessão existente.
+ </summary>
+	<param name="Pagina">Objeto da página atual (me ou page).</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.MessageEx(System.Exception,System.String)">
+	<summary>
+ Retorna mensagem tratada evitando dados técnicos em apresentação para usuário.
+ </summary>
+	<param name="Ex">Exceção a ser tratada.</param>
+	<param name="MensagemCompl">Texto de introdução. Será incluído no início da mensagem.</param>
+	<returns>Retorna texto a ser apresentado para o usuário, considerando o tratamento de erros previstos.</returns>
+	<remarks>Veja o padrão. A substituição ocorre sem ponto no final, por favor.</remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegExpCount(System.String,System.String)">
+	<summary>
+ Retorna a quantidade de estruturas regex encontradas na procura do select.
+ </summary>
+	<param name="Campos">Lista de campos onde os critérios serão procurados.</param>
+	<param name="Criterios">Critérios regex separados por ponto e vírgula.</param>
+	<returns>Retorna uma expressão capaz de mencionar quantidade de ocorrências do critério no campo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegExpInstr(System.String,System.String)">
+	<summary>
+ Retorna posição de texto em campo com base em cláusula select preparado para cláusula select.
+ </summary>
+	<param name="Campos">Nome do campo de pesquisa.</param>
+	<param name="Criterios">Critério regex a ser aplicado.</param>
+	<returns>Retorna texto pronto para ser colocado como campo do select.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegExpAmostra(System.String,System.String,System.String,System.Int32)">
+	<summary>
+ Retorna campo pronto para cláusula select com amostra do registro encontrado baseada em código regex.
+ </summary>
+	<param name="Campos">Nome do campo de pesquisa.</param>
+	<param name="Criterios">Critério regex a ser aplicado.</param>
+	<param name="Destaque">Formato da string de retorno considerando "\1" para grupo 1 e assim por diante.</param>
+	<returns>Retorna texto pronto para ser colocado como campo do select.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegExpLike(System.String,System.String)">
+	<summary>
+ Cria expressão para procura por ocorrência de expressão regex entre os campos informados. 
+ </summary>
+	<param name="Campos">Campos a serem tratados.</param>
+	<param name="Criterios">Critérios regex a serem aplicados ao mesmo tempo. Ex: "[cC][aA][sS][aA] [vV][eE][lL][hH][aA]" (texto com os dois ao mesmo tempo).</param>
+	<returns>Retorna sequência de select para pesquisa considerando condições regex.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.RegExpSemAcento(System.String)">
+	<summary>
+ Retorna expressão de pesquisa REGEX baseando-se na string passada.
+ </summary>
+	<param name="TEXTO">Texto para origem da expressão.</param>
+	<returns>Código de pesquisa desconsiderando os acentos.</returns>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.NotaMsg.Ex(System.Web.UI.Control)">
+	<summary>
+ Recupera ou registra dado em cache ainda para apresentação.
+ </summary>
+	<param name="Controle">Página corrente (deve ser PAGE).</param>
+	<value>Objeto MSG, que possui página onde msg foi gerada, exception e URL de redirecionamento.</value>
+	<returns>Retorna objeto MSG gerada, expception e URL de redirecionamento (página que trata do Nota).</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NotaMsg.Registra(System.Web.UI.Control,System.String,System.Exception,System.String,System.Boolean,System.String)">
+	<summary>
+ Registro de nota padrão.
+ </summary>
+	<param name="Controle">Controle onde ocorreu o evento.</param>
+	<param name="Texto">Texto caso não seja um erro.</param>
+	<param name="Nota">Exception caso seja um erro.</param>
+	<param name="Identif">Identificação, que é o título da mensagem.</param>
+	<param name="IgnoreNotas">Se deve ignorar as notas ou não (não apresentá-las na tela).</param>
+	<param name="URLRedirNota">URL de encaminhamento. Vazio para postback (mesma tela).</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NotaMsg.Registra(System.Web.UI.Control,System.Exception,System.String,System.Boolean,System.String)">
+	<summary>
+ Deve ser utilizada no TRY...CATCH ex as EXCEPTION...END TRY na forma TRATA(PAGE, EX, IGNORENotaS, URLREDIRNota).
+ </summary>
+	<param name="Controle">Página corrente onde ocorreu o Nota.</param>
+	<param name="Nota">Exception ocorrido.</param>
+	<param name="IgnoreNotas">Indica que Notas devem ser ignorados.</param>
+	<param name="URLRedirNota">Endereço da URL que receberá o controle. Esta deverá possuir NotaMSG.VERIFICA para que apresente o Nota adequadamente. Ignorar este parâmetro ou colocar "" significará POSTBACK na própria página.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NotaMsg.Registra(System.Web.UI.Control,System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ Registro de mensagem texto para aparecimento mediante VERIFICA.
+ </summary>
+	<param name="Controle">Controle onde ocorre a mensagem.</param>
+	<param name="Texto">Texto que deverá aparecer na mensagem.</param>
+	<param name="Identif">Identificação ou título da mensagem.</param>
+	<param name="IgnoreNotas">Ignorar as notas.</param>
+	<param name="URLRedirNota">URL de redirecionamento. Ocorrerá o encaminhamento para esta tela onde a função VERIFICA deverá ser executada.</param>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NotaMsg.MsgTexto(System.String,System.Exception)">
+	<summary>
+ Retorna a mensagem a ser exibida na tela a partir do texto simplificado e/ou Exception.
+ </summary>
+	<param name="Texto">Texto simplificado a ser incluído na explicação.</param>
+	<param name="Ex">Exception para tratamento através de messageEx.</param>
+	<returns>Retorna o texto representativo da notificação.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.NotaMsg.Verifica(System.Web.UI.Control)">
+	<summary>
+ Deve ser colocado em PRE_RENDER (postback ou não) das páginas que tratarão dos Notas. Serão apresentados os diálogos sem a necessidade de novo POST.
+ </summary>
+	<param name="Controle">Página atual sendo a propriedade PAGE, utilizada para recuperar variáveis de sessão.</param>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.NotaMsg">
+	<summary>
+ NotaMsg<br/>
+ Armazena e mostra mensagem de Nota como validador.
+ Para utilizar:
+ Try
+ ...
+ Catch ex as Exception
+ ...Icraft.NotaMsg.Trata(Page, Ex, IgnoreNotas, URLRedirNota)
+ End Try
+ Na página que tratará o Nota (postlocal ou redirNota), deverá colocar:
+ Icraft.NotaMsg.Verifica(Page) no PRE_RENDER.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.PrimLetraMaius(System.String)">
+	<summary>
+ Capitaliza um string levando em consideração exceções como sigla de Estados.
+ </summary>
+	<param name="value">O valor a ser capitalizado.</param>
+	<returns>Retorna a string capitalizada.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.TipoEntifica">
+	<summary>
+ Formas possíveis de entificar um texto.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Entifica(System.String,Sync.Icraft.IcftBase.TipoEntifica)">
+	<summary>
+ Transforma caracteres especiais em seus respectivos códigos Asc, preparados para HTML.
+ </summary>
+	<param name="Texto">O texto que será entificado.</param>
+	<param name="Tipo">O tipo de entificação.</param>
+	<returns>Retorna o texto passado com caracteres preparados para HTML de acordo com Tipo.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.CriadorDeObjetos.Criar(System.String,System.Object[])">
+	<summary>
+ Cria um objeto de um tipo especificado dentro da dll com base em seu nome.
+ </summary>
+	<param name="obj">O nome do tipo do objeto que será criado.</param>
+	<param name="params">Parâmetros que atendam a algum construtor do objeto especificado. No caso de nada ser passado, o contrutor default será admitido.</param>
+	<returns>Retorna o objeto criado.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.CriadorDeObjetos">
+	<summary>
+ Classe responsável por criar objetos com base em uma dll carregada dinamicamente.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Sync.Icraft.IcftBase.VarDeSessao(System.Web.UI.Page,System.String,System.String)">
+	<summary>
+ Monta variável para armazenamento padronizado na sessão, viewstate ou condição correspondente a página em questão.
+ </summary>
+	<param name="Page">Página onde será obtido request para acesso à url da página.</param>
+	<param name="Bloco">Bloco ou condição específica na página. Utilizado para diferenciar controles, mas pode ser deixado em branco.</param>
+	<param name="Param">Nome da variável a ser registrada</param>
+	<value>String contendo variável de registro.</value>
+	<returns>String contendo variável de registro.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.PegaTituloPagWeb(System.String)">
+	<summary>
+ Pega titulo da página entre as tags title.
+ </summary>
+	<param name="Arquivo">Nome do arquivo de página (pode conter ~/).</param>
+	<returns>Retorna o texto entre as tags title da página.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.PegaTituloPagWebDoCabeca(System.String)">
+	<summary>
+ Pegar título da página web a partir do cabeçalho
+ </summary>
+	<param name="Arquivo">Arquivo de página web (pode conter ~/).</param>
+	<returns>Retorna trecho de título do cabeçalho.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.PegaHtmlEmArquivo(System.String,System.String)">
+	<summary>
+ Pega um regexhtml de uma página.
+ </summary>
+	<param name="Arquivo">Arquivo a ser pesquisado (pode conter ~/).</param>
+	<param name="Tag">Tag que será pesquisada.</param>
+	<returns>Retorna regexhtml daquele trecho.</returns>
+	<remarks></remarks>
+</member><member name="T:Sync.Icraft.IcftBase.Gerador.GravaOracleParteTipo">
+	<summary>
+ Especificação de gravação de tipo em GERADOR para todas, parte um ou parte dois.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.Gerador.GravaOracle(System.Boolean,Sync.Icraft.IcftBase.Gerador.GravaOracleParteTipo,System.Object[])">
+	<summary>
+ Opera script a ser executado no oracle neste momento ou através de download do texto.
+ </summary>
+	<param name="ExecutaNoOracle">Executa direto no oracle.</param>
+	<param name="Parte">Parte(0=todas,1=sem restr e 2=restrições)</param>
+	<param name="ListaDeParams">Parâmetros como ESQUEMA,"ESQUEMA".</param>
+	<returns>Retorna texto de console da criação no oracle (caso executando através oracle).</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TipoComoTabela(System.String,System.Object,System.String,System.Data.DataTable)">
+	<summary>
+ Transforma um objeto com seus atributos em uma tabela.
+ </summary>
+	<param name="Objeto">Objeto contendo os atributos.</param>
+	<param name="Filtro">Regex contendo termos de seleção dos atributos ex.: não começado por... (?is)^(?!teste).</param>
+	<returns>Datatable contendo os atributos.</returns>
+	<remarks></remarks>
+</member><member name="M:Sync.Icraft.IcftBase.TextoEmStream(System.String)">
+	<summary>
+ Transforma texto em stream.
+ </summary>
+	<param name="Texto">Texto a ser colocado em stream.</param>
+	<returns>Stream.</returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

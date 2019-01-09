@@ -1,0 +1,22 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>
+    </PublishUrlHistory>
+    <InstallUrlHistory>
+    </InstallUrlHistory>
+    <SupportUrlHistory>
+    </SupportUrlHistory>
+    <UpdateUrlHistory>
+    </UpdateUrlHistory>
+    <BootstrapperUrlHistory>
+    </BootstrapperUrlHistory>
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>true</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartArguments>-semconfirm -email "suporte@icraft.com.br" -smtp "smtpi" -dir "\\10.0.0.48\Inetpub_C\wwwroot" -repl "\\10.0.0.70\Inetpub_C\_Backup\10.0.0.48_C_Inetpub" -dir "\\10.0.0.48\Inetpub_D\wwwroot" -repl "\\10.0.0.70\Inetpub_C\_Backup\10.0.0.48_D_Inetpub" -dir "\\10.0.0.70\Inetpub_C\wwwroot" -repl "\\10.0.0.48\Inetpub_D\_Backup\10.0.0.70_C_Inetpub" -arqlog "C:\Bkp\Bkp.log" -subject "[Relatorio Sync - Webserveribm]" -recurso "10.0.0.48 Sync Sites"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>-semconfirm -email "suporte@icraft.com.br" -smtp "smtpi" -dir "\\10.0.0.48\Inetpub_C\wwwroot" -repl "\\10.0.0.70\Inetpub_C\_Backup\10.0.0.48_C_Inetpub" -dir "\\10.0.0.48\Inetpub_D\wwwroot" -repl "\\10.0.0.70\Inetpub_C\_Backup\10.0.0.48_D_Inetpub" -dir "\\10.0.0.70\Inetpub_C\wwwroot" -repl "\\10.0.0.48\Inetpub_D\_Backup\10.0.0.70_C_Inetpub" -arqlog "C:\Bkp\Bkp.log" -subject "[Relatorio Sync - Webserveribm]" -recurso "10.0.0.48 Sync Sites"</StartArguments>
+  </PropertyGroup>
+</Project>
